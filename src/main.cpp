@@ -364,6 +364,7 @@ void setup()
 
     case m5::board_t::board_M5StackCoreS3:
     case m5::board_t::board_M5StackCoreS3SE:
+    case m5::board_t::board_M5StackChan:
       scale = 1.0f;
       position_top = 0;
       position_left = 0;
@@ -396,9 +397,12 @@ void setup()
       M5.Mic.config(mic_cfg);
       break;
 
-      
-    defalut:
-      M5.Log.println("Invalid board.");
+    default:
+      M5.Log.printf("Invalid board. board_id=%d\n", (int)M5.getBoard());
+      scale = 1.0f;
+      position_top = 0;
+      position_left = 0;
+      display_rotation = 1;
       break;
   }
 #ifndef SDL_h_
